@@ -268,9 +268,15 @@ body {
   to { transform: rotate(360deg); }
 }
 
-.animate-float { animation: float 3s ease-in-out infinite; }
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float      { animation: float 3s ease-in-out infinite; }
 .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
-.animate-spin-slow { animation: spin-slow 8s linear infinite; }
+.animate-spin-slow  { animation: spin-slow 8s linear infinite; }
+.animate-fade-in-up { animation: fade-in-up 0.5s ease forwards; }
 
 .skeleton {
   background: linear-gradient(90deg, rgba(148,163,184,0.1) 25%, rgba(148,163,184,0.2) 50%, rgba(148,163,184,0.1) 75%);
@@ -298,10 +304,10 @@ body {
 
 /* ========== GRADIENT BUTTON ========== */
 .btn-primary {
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, #10b981 0%, #059669 50%, #0d9488 100%);
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 12px 24px;
   font-weight: 600;
   cursor: pointer;
@@ -320,7 +326,7 @@ body {
 .btn-primary:hover::before { left: 100%; }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 12px 32px rgba(16, 185, 129, 0.45), 0 4px 12px rgba(0,0,0,0.3);
 }
 
 /* ========== TABLE STYLES ========== */

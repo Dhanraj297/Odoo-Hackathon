@@ -9,6 +9,7 @@ import {
   Play, Check, Sparkles, TreePine, Droplets, Sun
 } from 'lucide-react';
 import CountUp from 'react-countup';
+import EarthIllustration from '@/components/EarthIllustration';
 
 // ─── Particle component ────────────────────────────────────────────────────────
 function Particles() {
@@ -75,40 +76,7 @@ function FloatingLeaves() {
   );
 }
 
-// ─── Earth Globe SVG ───────────────────────────────────────────────────────────
-function EarthIllustration() {
-  return (
-    <motion.div
-      className="relative w-80 h-80 mx-auto"
-      animate={{ rotate: 360 }}
-      transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-    >
-      <div className="w-full h-full rounded-full overflow-hidden"
-        style={{
-          background: 'radial-gradient(circle at 35% 35%, #22d3ee, #1d4ed8 40%, #0f172a)',
-          boxShadow: '0 0 60px rgba(16, 185, 129, 0.4), 0 0 120px rgba(59, 130, 246, 0.2), inset -30px -30px 60px rgba(0,0,0,0.4)',
-        }}
-      >
-        {/* Continents as blobs */}
-        <svg viewBox="0 0 200 200" className="w-full h-full opacity-60">
-          <ellipse cx="60" cy="80" rx="25" ry="30" fill="#10b981" opacity="0.8"/>
-          <ellipse cx="90" cy="70" rx="15" ry="20" fill="#10b981" opacity="0.7"/>
-          <ellipse cx="130" cy="90" rx="20" ry="25" fill="#10b981" opacity="0.8"/>
-          <ellipse cx="155" cy="75" rx="10" ry="12" fill="#10b981" opacity="0.6"/>
-          <ellipse cx="80" cy="130" rx="18" ry="15" fill="#10b981" opacity="0.7"/>
-          <ellipse cx="140" cy="140" rx="12" ry="10" fill="#10b981" opacity="0.6"/>
-        </svg>
-      </div>
-      {/* Orbiting ring */}
-      <motion.div
-        className="absolute inset-0 rounded-full border-2 border-emerald-400/30"
-        style={{ transform: 'rotateX(75deg)' }}
-        animate={{ rotate: -360 }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-      />
-    </motion.div>
-  );
-}
+// EarthIllustration is imported from @/components/EarthIllustration
 
 // ─── Stat counter card ─────────────────────────────────────────────────────────
 function StatCard({ icon: Icon, value, suffix, label, color }: {
@@ -116,21 +84,22 @@ function StatCard({ icon: Icon, value, suffix, label, color }: {
 }) {
   return (
     <motion.div
-      className="glass-card p-6 text-center hover-lift"
+      className="glass-card p-10 text-center hover-lift flex flex-col items-center w-full"
+      className="glass-card p-12 text-center hover-lift flex flex-col items-center w-full"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <div className={`w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center`}
-        style={{ background: `${color}20` }}>
-        <Icon size={24} style={{ color }} />
+      <div className="w-20 h-20 rounded-2xl mx-auto mb-8 flex items-center justify-center"
+        style={{ background: `${color}22` }}>
+        <Icon size={40} style={{ color }} />
       </div>
-      <div className="text-3xl font-bold text-white mb-1">
+      <div className="text-5xl font-black text-white mb-3 tracking-tight">
         <CountUp end={value} duration={2.5} separator="," enableScrollSpy scrollSpyOnce />
         {suffix}
       </div>
-      <div className="text-slate-400 text-sm">{label}</div>
+      <div className="text-slate-400 text-sm font-medium tracking-wide">{label}</div>
     </motion.div>
   );
 }
@@ -141,20 +110,20 @@ function FeatureCard({ icon: Icon, title, description, gradient, delay }: {
 }) {
   return (
     <motion.div
-      className="glass-card p-8 hover-lift group cursor-pointer"
+      className="glass-card p-10 hover-lift group cursor-pointer flex flex-col items-center text-center"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
       whileHover={{ scale: 1.02 }}
     >
-      <div className={`w-14 h-14 rounded-2xl mb-6 flex items-center justify-center bg-gradient-to-br ${gradient}`}>
-        <Icon size={28} className="text-white" />
+      <div className={`w-16 h-16 rounded-2xl mb-7 flex items-center justify-center bg-gradient-to-br ${gradient} shadow-lg`}>
+        <Icon size={30} className="text-white" />
       </div>
-      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">{title}</h3>
-      <p className="text-slate-400 leading-relaxed">{description}</p>
-      <div className="mt-6 flex items-center text-emerald-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-        Learn more <ArrowRight size={16} className="ml-2" />
+      <h3 className="text-xl font-bold text-white mb-4 group-hover:text-emerald-400 transition-colors">{title}</h3>
+      <p className="text-slate-400 leading-relaxed text-sm">{description}</p>
+      <div className="mt-8 flex items-center justify-center text-emerald-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity gap-1">
+        Learn more <ArrowRight size={15} />
       </div>
     </motion.div>
   );
@@ -307,19 +276,6 @@ export default function LandingPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="relative">
-              {/* Glow rings */}
-              {[1, 2, 3].map(i => (
-                <motion.div
-                  key={i}
-                  className="absolute inset-0 rounded-full border border-emerald-500/20"
-                  style={{ 
-                    scale: 1 + i * 0.15, 
-                    opacity: 1 - i * 0.3,
-                  }}
-                  animate={{ scale: [1 + i * 0.15, 1 + i * 0.2, 1 + i * 0.15] }}
-                  transition={{ duration: 3, repeat: Infinity, delay: i * 0.5 }}
-                />
-              ))}
               <EarthIllustration />
             </div>
             
@@ -353,76 +309,52 @@ export default function LandingPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 relative">
+      <section className="py-32 relative">
         <div className="container">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold text-white mb-4">
+            <h2 className="text-4xl font-bold text-white mb-5">
               Real Impact. <span className="gradient-text">Measurable Results.</span>
             </h2>
-            <p className="text-slate-400 max-w-xl mx-auto">
+            <p className="text-slate-400 max-w-xl mx-auto text-base leading-relaxed">
               Trusted by forward-thinking enterprises worldwide to drive meaningful sustainability outcomes.
             </p>
           </motion.div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
-            <StatCard icon={Wind} value={48200} suffix=" t" label="Carbon Saved (tCO₂e)" color="#10b981" />
-            <StatCard icon={Users} value={2450} suffix="+" label="Active Employees" color="#3b82f6" />
-            <StatCard icon={TreePine} value={127} suffix="" label="CSR Events Run" color="#f59e0b" />
-            <StatCard icon={Award} value={82} suffix="/100" label="Avg. ESG Score" color="#8b5cf6" />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <StatCard icon={Wind}     value={48200} suffix=" t"    label="Carbon Saved (tCO₂e)" color="#10b981" />
+            <StatCard icon={Users}    value={2450}  suffix="+"     label="Active Employees"    color="#3b82f6" />
+            <StatCard icon={TreePine} value={127}   suffix=""      label="CSR Events Run"       color="#f59e0b" />
+            <StatCard icon={Award}    value={82}    suffix="/100"  label="Avg. ESG Score"       color="#8b5cf6" />
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-24 relative">
+      <section className="py-32 relative">
         <div className="container">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-emerald-400 text-sm font-semibold uppercase tracking-widest mb-3 block">Platform Modules</span>
-            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+            <span className="text-emerald-400 text-sm font-semibold uppercase tracking-widest mb-4 block">Platform Modules</span>
+            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-5">
               Everything You Need for <span className="gradient-text">ESG Excellence</span>
             </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+            <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
               Four powerful modules that work together to create a complete sustainability ecosystem for your organization.
             </p>
           </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <FeatureCard
-              icon={Wind}
-              title="Environmental"
-              description="Track carbon emissions, manage environmental goals, and monitor your Scope 1, 2, and 3 footprint with precision."
-              gradient="from-emerald-500 to-teal-600"
-              delay={0}
-            />
-            <FeatureCard
-              icon={Users}
-              title="Social"
-              description="Manage CSR activities, employee participation, diversity metrics, and community impact at scale."
-              gradient="from-blue-500 to-cyan-600"
-              delay={0.1}
-            />
-            <FeatureCard
-              icon={Shield}
-              title="Governance"
-              description="Policy management, compliance tracking, audit trails, and risk dashboards to stay always audit-ready."
-              gradient="from-violet-500 to-purple-600"
-              delay={0.2}
-            />
-            <FeatureCard
-              icon={Zap}
-              title="Gamification"
-              description="Boost engagement with XP, badges, leaderboards, and challenges that make sustainability fun and rewarding."
-              gradient="from-amber-500 to-orange-600"
-              delay={0.3}
-            />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <FeatureCard icon={Wind}   title="Environmental" description="Track carbon emissions, manage environmental goals, and monitor your Scope 1, 2, and 3 footprint with precision." gradient="from-emerald-500 to-teal-600" delay={0} />
+            <FeatureCard icon={Users}  title="Social"         description="Manage CSR activities, employee participation, diversity metrics, and community impact at scale."           gradient="from-blue-500 to-cyan-600"    delay={0.1} />
+            <FeatureCard icon={Shield} title="Governance"     description="Policy management, compliance tracking, audit trails, and risk dashboards to stay always audit-ready."     gradient="from-violet-500 to-purple-600" delay={0.2} />
+            <FeatureCard icon={Zap}    title="Gamification"   description="Boost engagement with XP, badges, leaderboards, and challenges that make sustainability fun and rewarding." gradient="from-amber-500 to-orange-600"   delay={0.3} />
           </div>
         </div>
       </section>
