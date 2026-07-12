@@ -13,9 +13,7 @@ import Reports from './pages/Reports';
 import Settings from './pages/Settings';
 
 const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-  if (loading) return <div className="loading-center"><div className="spinner"></div></div>;
-  if (!user) return <Navigate to="/login" replace />;
+  // Auth bypassed — open access for demo
   return children;
 };
 
